@@ -1,3 +1,5 @@
+# https://choosealicense.org
+
 # Crease.vim
 Easy foldtext customization for [neo]vim.
 

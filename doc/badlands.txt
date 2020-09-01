@@ -1,0 +1,38 @@
+Update mywork.sh with new books to read.                    *badlands* *badlands.vim*
+
+Author: ausean
+License: MIT License
+Repository: https://github.com/ausean/badlands.vim
+
+==============================================================================
+CONTENTS                                                *badlands-contents*
+
+    1. Introduction                                     |badlands-introduction|
+    2. Installation                                     |badlands-installation|
+    3. Examples                                             |badlands-examples|
+
+==============================================================================
+1. Introduction                                         *badlands-introduction*
+
+The aim of the badlands plugin is to introduce |statusline| like syntax to the
+|foldtext| option.
+
+Setting the |foldtext| option to a (non-default) useful value is too arduous a
+task in vanilla vim. One must set the |foldtext| option to a user defined
+function, where everything must be done manually. This plugin offers a
+convenient, |statusline| like syntax using '%'s to set the |foldtext| option.
+
+This plugin also allows one to set the |foldtext| option to different values
+dynamically, depending on the |foldmethod|. This is usefull for example if the
+|foldmethod| is set in a |modeline|.
+
+==============================================================================
+2. Installation                                         *badlands-installation*
+
+Clone the repository to `~/.vim/pack/*/start/badlands.vim`, or use your favorite
+plugin manager.
+
+==============================================================================
+3. Examples                                             *badlands-examples*
+
+vim -c "call badlands#add_books()" booklist.txt
