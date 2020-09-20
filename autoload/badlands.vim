@@ -4,7 +4,9 @@
 " License: MIT
 " Usage:
 "   vim -c "call badlands#add_books()" booklist.txt
-"   vim -c "call badlands#add_songs()" 0_like.m3u
+"   vim -c "call badlands#remove_books()" booklist.txt
+"   vim -c "call badlands#add_songs('dir')" 0_like.m3u
+"   vim -c "call badlands#remove_songs('dir')" 0_like.m3u
 " History:
 "   v0.1:    fork from an example git repo
 "   v0.2:    created badlands#add_books()
@@ -14,6 +16,7 @@
 "             the XDG_DATA_HOME
 "            updated add_songs() to take an argument
 "            added badlands#remove_songs()
+"   v0.3.3:  added remove_books()
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -50,6 +53,31 @@ function! badlands#add_books() abort
   "execute line('w0') 'delete _'
 endfunction
 "1}}}
+
+"{{{1
+function! badlands#remove_books() abort
+  let content = system('ls '.s:booklocation.'/*') "if use *, the full pathname will be listed
+	if v:shell_error
+        echohl Error
+        echom "ERROR #" . v:shell_error
+        echohl WarningMsg
+        echohl None
+  endif
+
+  let lnum = 1
+  while lnum <= line('$')
+    if (stridx(content, substitute(getline(lnum), '|\d$', '', '')) < 0)
+      echo getline(lnum)
+      "delete the line
+      execute lnum.'delete'
+    else
+      let lnum = lnum + 1
+    endif
+  endwhile
+  execute 'sort'
+
+endfunction
+" 1}}}
 
 "{{{1
 function! badlands#add_songs(dir) abort
