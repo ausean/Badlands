@@ -17,6 +17,7 @@
 "            updated add_songs() to take an argument
 "            added badlands#remove_songs()
 "   v0.3.3:  added remove_books()
+"   v0.3.4:  change s:booklocation to onedrive (via rclone)
 " =============================================================================
 
 let s:save_cpo = &cpo
@@ -26,10 +27,11 @@ set cpo&vim
 "\                    epub: 'ebook-viewer',
 "\                    djvu: ''}
 "let s:itemlist = []
-let s:booklocation = '/home/ausean/Sync/pion/#rg'
-let s:songlocation = '/home/ausean/music/'
+"let s:booklocation = '/home/ausean/Sync/pion/#rg'
+let s:booklocation = '/home/ausean/cloud/drive/onedrive/rg/study'
+let s:songlocation = '/home/ausean/Music/'
 
-"{{{1
+"{{{ @name add_books
 function! badlands#add_books() abort
 "	echom s:bookviewer['pdf']
 "	echom s:bookviewer.epub
@@ -54,7 +56,7 @@ function! badlands#add_books() abort
 endfunction
 "1}}}
 
-"{{{1
+"{{{ @name remove_books
 function! badlands#remove_books() abort
   let content = system('ls '.s:booklocation.'/*') "if use *, the full pathname will be listed
 	if v:shell_error
@@ -79,7 +81,7 @@ function! badlands#remove_books() abort
 endfunction
 " 1}}}
 
-"{{{1
+"{{{ @name add_songs
 function! badlands#add_songs(dir) abort
   "let content = system('ls '.s:songlocation.'/*.{mp3,ogg,m4a}') "will return
   "the full pathname.
@@ -104,7 +106,7 @@ function! badlands#add_songs(dir) abort
 endfunction
 " 1}}}
 
-"{{{1
+"{{{ @name remove_songs
 function! badlands#remove_songs(dir) abort
   let content = system('cd '.s:songlocation.a:dir.' && ls *.{mp3,ogg,m4a} 2> /dev/null')
 	if v:shell_error
